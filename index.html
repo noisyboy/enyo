@@ -1,1 +1,291 @@
-<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><title>E N Y O</title><style type="text/css" media="all">body{margin:0;background:#1d1d1d}#main{width:100vw;height:100vh;background:radial-gradient(#24005e,#000);display:flex;flex-direction:column;justify-content:center;align-items:center}input:focus,select{outline:0}#flexbox{border-radius:10px;padding:40px;width:70vw;height:15vh;background:radial-gradient(#1d1d1d,#000);display:flex;flex-direction:column;justify-content:center;animation:blink 10s infinite alternate}#search{font-family:Courier;color:#0f0;background:#000;padding:10px;border:1px solid #fff;font-size:auto}#menu{position:absolute;top:10%}#onLineStat{width:10px;height:10px;border-radius:50%;display:inline-block}#searchBtn{border-radius:50%;width:25px;height:25px;font-size:10px}@keyframes blink{from{box-shadow:0 0 1px red}to{box-shadow:0 0 15px #ff005f}}#header{z-index:1;display:none;width:100vw;height:20px;background:#fff}</style></head><body><div id="header"><center><p>You are Offline &ensp;:-(</p></center></div><div id="main"><h1 style="font-family:monospace;color:#ff005c;font-size:50px;text-shadow:0 0 5px #ff005c;z-index:1">E N Y 0</h1><div id="flexbox"><span id="menu"><p style="color:#fff;font-family:monospace;display:inline-block">Select search engine &ensp;<div id="onLineStat"></div></p><select style="color:#ff005c;font-family:monospace;background:#000;border:1px solid #fff" name="sEngine" id="sEngine"><option value="custom">CUSTOM</option><option value="1">GOOGLE</option><option value="2">BING</option><option value="3">YAHOO</option><option value="4">DUCKDUCK-GO</option><option value="5">YANDEX</option><option value="6">SHODAN</option><option value="7">GIBIRU</option><option value="8">IZITO</option><option value="9">STARTPAGE</option><option value="10">BING VS GOOGLE</option><option value="11">Yahoo Adv</option><option value="12">Google Adv</option><option value="13">ADVANGLE</option></select></span><br><center><span><input type="search" name="search" id="search" placeholder="search"> &ensp;<button style="color:#ff005c;font-family:monospace;background:#000;border:1px solid #fff" id="searchBtn">GO</button></span></center></div></div><script type="text/javascript" charset="utf-8">var search=document.getElementById("search"),sEngine=document.getElementById("sEngine"),searchBtn=document.getElementById("searchBtn"),onLineStat=document.getElementById("onLineStat"),header=document.getElementById("header");function ConStatus(){"none"==navigator.connection.type?(onLineStat.style.background="red",header.style.display="block"):(onLineStat.style.background="lime",header.style.display="none")}function SearchEngine(){var e;switch(sEngine.value){case"custom":e="";break;case"1":e="https://www.google.com/search?q=";break;case"2":e="https://www.bing.com/search?q=";break;case"3":e="https://search.yahoo.com/search?p=";break;case"4":e="https://www.duckduckgo.com/?q=";break;case"5":e="https://yandex.ru/search/?text=";break;case"6":e="https://www.shodan.io/search?query=";break;case"7":e="https://gibiru.com/results.html?q=";break;case"8":e="https://www.izito.com/search?q=";break;case"9":search.value="",e="https://www.startpage.com/";break;case"10":search.value="",e="https://bvsg.org/";break;case"11":search.value="",e="https://search.yahoo.com/web/advanced";break;case"12":search.value="",e="https://www.google.com/advanced_search";break;case"13":search.value="",e="https://advangle.com/"}return e}ConStatus(),navigator.connection.onchange=function(){"none"==navigator.connection.type?(onLineStat.style.background="red",header.style.display="block"):(onLineStat.style.background="lime",header.style.display="none")},searchBtn.onclick=function(){location.href=SearchEngine()+search.value},search.onsearch=function(){location.href=SearchEngine()+search.value}</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E N Y 0 // OSINT TERMINAL</title>
+    <style>
+        /* Cyberpunk Theme Variables */
+        :root {
+            --bg: #0a0a0c;
+            --panel-bg: #111116;
+            --text-main: #00ffcc;
+            --accent-1: #ff005c;
+            --accent-2: #bc13fe;
+            --border: 1px solid var(--text-main);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            /* Subtle tech-grid background */
+            background-image: 
+                linear-gradient(rgba(0, 255, 204, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 204, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: var(--text-main);
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Responsive Header */
+        #header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--accent-1);
+            color: #fff;
+            text-align: center;
+            padding: 8px;
+            font-weight: bold;
+            display: none;
+            z-index: 10;
+            text-shadow: 0 0 5px #000;
+        }
+
+        /* Main Terminal Container */
+        .container {
+            width: 90%;
+            max-width: 700px;
+            background: var(--panel-bg);
+            border: var(--border);
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.1), inset 0 0 20px rgba(0, 255, 204, 0.05);
+            padding: 2.5rem;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        /* UI Decoration */
+        .container::before {
+            content: "SYS.REQ.GRANTED";
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background: var(--bg);
+            padding: 0 10px;
+            font-size: 0.8rem;
+            color: var(--accent-1);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--accent-1);
+            text-shadow: 0 0 10px var(--accent-1), 2px 2px 0px rgba(188, 19, 254, 0.5);
+            margin-bottom: 2rem;
+            letter-spacing: 8px;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            border-bottom: 1px dashed var(--text-main);
+            padding-bottom: 10px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #onLineStat {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: lime;
+            box-shadow: 0 0 8px lime;
+            transition: all 0.3s;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            font-size: 0.85rem;
+            color: var(--accent-2);
+            text-transform: uppercase;
+        }
+
+        select, input, button {
+            font-family: inherit;
+            background: transparent;
+            border: var(--border);
+            color: var(--text-main);
+            padding: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        select:focus, input:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.4);
+            border-color: var(--accent-1);
+        }
+
+        select {
+            background: var(--bg);
+            cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .search-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        input[type="search"] {
+            flex-grow: 1;
+        }
+
+        button {
+            background: var(--accent-1);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(0,0,0,0.5);
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background: var(--accent-2);
+            box-shadow: 0 0 15px var(--accent-2);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 550px) {
+            .search-row {
+                flex-direction: column;
+            }
+            button {
+                width: 100%;
+                padding: 15px;
+            }
+            .container {
+                padding: 1.5rem;
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header">WARN: SYSTEM OFFLINE. NETWORK DISCONNECTED.</div>
+    
+    <div class="container">
+        <h1>E N Y 0</h1>
+        
+        <div class="controls">
+            <div class="status-bar">
+                <span>UPLINK: ACTIVE</span>
+                <div class="status-indicator">
+                    <span>NET_STAT</span>
+                    <div id="onLineStat"></div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="sEngine">Select Target Node</label>
+                <select id="sEngine"></select>
+            </div>
+
+            <div class="input-group">
+                <label for="search">Query Parameters</label>
+                <div class="search-row">
+                    <input type="search" id="search" placeholder="Enter payload..." autocomplete="off">
+                    <button id="searchBtn">EXECUTE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const searchInput = document.getElementById("search");
+        const engineSelect = document.getElementById("sEngine");
+        const searchBtn = document.getElementById("searchBtn");
+        const onLineStat = document.getElementById("onLineStat");
+        const header = document.getElementById("header");
+
+        // Dynamic Engine Library (Easy to scale/modify)
+        const engines = [
+            { name: "Google (General / Dorks)", url: "https://www.google.com/search?q=" },
+            { name: "DuckDuckGo (Privacy)", url: "https://duckduckgo.com/?q=" },
+            { name: "Startpage (Proxied Google)", url: "https://www.startpage.com/sp/search?query=" },
+            { name: "Shodan (IoT / Infra)", url: "https://www.shodan.io/search?query=" },
+            { name: "Censys (Hosts / Certs)", url: "https://search.censys.io/search?resource=hosts&q=" },
+            { name: "Exploit-DB (CVE Search)", url: "https://www.exploit-db.com/search?cve=" },
+            { name: "GitHub (Code Recon)", url: "https://github.com/search?type=code&q=" },
+            { name: "arXiv (Research Papers)", url: "https://arxiv.org/search/?query=" },
+            { name: "Yandex (Reverse Img / Eastern Web)", url: "https://yandex.com/search/?text=" },
+            { name: "Brave Search (Independent Index)", url: "https://search.brave.com/search?q=" }
+        ];
+
+        // Populate the dropdown menu dynamically
+        engines.forEach((engine, index) => {
+            let option = document.createElement("option");
+            option.value = index;
+            option.text = engine.name;
+            engineSelect.appendChild(option);
+        });
+
+        // Modern Network Status Handler
+        function updateConnectionStatus() {
+            if (navigator.onLine) {
+                onLineStat.style.background = "lime";
+                onLineStat.style.boxShadow = "0 0 8px lime";
+                header.style.display = "none";
+            } else {
+                onLineStat.style.background = "red";
+                onLineStat.style.boxShadow = "0 0 12px red";
+                header.style.display = "block";
+            }
+        }
+
+        // Listen for live network changes
+        window.addEventListener('online', updateConnectionStatus);
+        window.addEventListener('offline', updateConnectionStatus);
+        updateConnectionStatus(); // Run initial check on load
+
+        // Core Search Execution
+        function executeSearch() {
+            const query = encodeURIComponent(searchInput.value.trim());
+            if (!query) return; // Ignore empty clicks
+            
+            const selectedEngineUrl = engines[engineSelect.value].url;
+            window.location.href = selectedEngineUrl + query;
+        }
+
+        // Event Listeners for Execution
+        searchBtn.addEventListener('click', executeSearch);
+        
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                executeSearch();
+            }
+        });
+    </script>
+</body>
+</html>

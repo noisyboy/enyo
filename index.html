@@ -23,11 +23,12 @@
 
         body {
             background-color: var(--bg);
-            /* Subtle tech-grid background */
+            /* Animated Grid Background */
             background-image: 
-                linear-gradient(rgba(0, 255, 204, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 204, 0.03) 1px, transparent 1px);
-            background-size: 20px 20px;
+                linear-gradient(rgba(0, 255, 204, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 204, 0.08) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: gridScroll 3s linear infinite;
             color: var(--text-main);
             font-family: 'Courier New', Courier, monospace;
             display: flex;
@@ -36,6 +37,24 @@
             justify-content: center;
             min-height: 100vh;
             overflow: hidden;
+            position: relative;
+        }
+
+        /* Seamless Infinite Grid Animation */
+        @keyframes gridScroll {
+            0% { background-position: 0 0; }
+            100% { background-position: 40px 40px; }
+        }
+
+        /* CRT Scanline Overlay */
+        body::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            z-index: 5;
+            pointer-events: none;
         }
 
         /* Responsive Header */
@@ -59,10 +78,18 @@
             max-width: 700px;
             background: var(--panel-bg);
             border: var(--border);
-            box-shadow: 0 0 15px rgba(0, 255, 204, 0.1), inset 0 0 20px rgba(0, 255, 204, 0.05);
+            /* New 3D Box Shadow Setup */
+            box-shadow: 
+                10px 10px 0px rgba(255, 0, 92, 0.8),    /* Sharp 3D pink shadow */
+                -4px -4px 0px rgba(188, 19, 254, 0.3),  /* Subtle 3D purple shadow */
+                0 0 15px rgba(0, 255, 204, 0.1),        /* Base cyan ambient glow */
+                inset 0 0 20px rgba(0, 255, 204, 0.05); /* Inner terminal depth */
             padding: 2.5rem;
             border-radius: 4px;
             position: relative;
+            z-index: 10;
+            /* Added subtle transition in case you add hover effects later */
+            transition: box-shadow 0.3s ease; 
         }
 
         /* UI Decoration */
@@ -229,14 +256,15 @@
         const onLineStat = document.getElementById("onLineStat");
         const header = document.getElementById("header");
 
-        // Dynamic Engine Library (Easy to scale/modify)
+        // Dynamic Engine Library
         const engines = [
             { name: "Google (General / Dorks)", url: "https://www.google.com/search?q=" },
             { name: "DuckDuckGo (Privacy)", url: "https://duckduckgo.com/?q=" },
             { name: "Startpage (Proxied Google)", url: "https://www.startpage.com/sp/search?query=" },
             { name: "Shodan (IoT / Infra)", url: "https://www.shodan.io/search?query=" },
             { name: "Censys (Hosts / Certs)", url: "https://search.censys.io/search?resource=hosts&q=" },
-            { name: "Exploit-DB (CVE Search)", url: "https://www.exploit-db.com/search?cve=" },
+            { name: "Exploit-DB (via Dork)", url: "https://www.google.com/search?q=site:exploit-db.com+" },
+            { name: "Wayback Machine (Archive)", url: "https://web.archive.org/web/*/" },
             { name: "GitHub (Code Recon)", url: "https://github.com/search?type=code&q=" },
             { name: "arXiv (Research Papers)", url: "https://arxiv.org/search/?query=" },
             { name: "Yandex (Reverse Img / Eastern Web)", url: "https://yandex.com/search/?text=" },

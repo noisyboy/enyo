@@ -78,17 +78,16 @@
             max-width: 700px;
             background: var(--panel-bg);
             border: var(--border);
-            /* New 3D Box Shadow Setup */
+            /* 3D Box Shadow Setup */
             box-shadow: 
-                10px 10px 0px rgba(255, 0, 92, 0.8),    /* Sharp 3D pink shadow */
-                -4px -4px 0px rgba(188, 19, 254, 0.3),  /* Subtle 3D purple shadow */
-                0 0 15px rgba(0, 255, 204, 0.1),        /* Base cyan ambient glow */
-                inset 0 0 20px rgba(0, 255, 204, 0.05); /* Inner terminal depth */
+                10px 10px 0px rgba(255, 0, 92, 0.8),    
+                -4px -4px 0px rgba(188, 19, 254, 0.3),  
+                0 0 15px rgba(0, 255, 204, 0.1),        
+                inset 0 0 20px rgba(0, 255, 204, 0.05); 
             padding: 2.5rem;
             border-radius: 4px;
             position: relative;
             z-index: 10;
-            /* Added subtle transition in case you add hover effects later */
             transition: box-shadow 0.3s ease; 
         }
 
@@ -203,6 +202,26 @@
             box-shadow: 0 0 15px var(--accent-2);
         }
 
+        /* Signature Link */
+        .signature {
+            text-align: right;
+            margin-top: 1.5rem;
+            font-size: 0.8rem;
+            color: var(--accent-2);
+        }
+
+        .signature a {
+            color: var(--text-main);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .signature a:hover {
+            color: var(--accent-1);
+            text-shadow: 0 0 8px var(--accent-1);
+        }
+
         /* Mobile Responsiveness */
         @media (max-width: 550px) {
             .search-row {
@@ -245,6 +264,10 @@
                     <input type="search" id="search" placeholder="Enter payload..." autocomplete="off">
                     <button id="searchBtn">EXECUTE</button>
                 </div>
+            </div>
+            
+            <div class="signature">
+                SYS_DEV // <a href="https://github.com/noisyboy" target="_blank" rel="noopener noreferrer">@noisyboy</a>
             </div>
         </div>
     </div>

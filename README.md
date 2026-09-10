@@ -5,4 +5,4 @@
 
 * In future more OSINT tools and functionality will be added.
 
->> Hosted at <a href="https://noisyboy.qzz.io/ENYO">ENYO</a>
+>> Hosted at <a href="https://noisyboy.qzz.io/enyo">ENYO</a>

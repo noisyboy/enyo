@@ -326,7 +326,7 @@
             if (!query) return; // Ignore empty clicks
             
             const selectedEngineUrl = engines[engineSelect.value].url;
-            window.location.href = selectedEngineUrl + query;
+          window.open(selectedEngineUrl + query, '_blank');
         }
 
         // Event Listeners for Execution
